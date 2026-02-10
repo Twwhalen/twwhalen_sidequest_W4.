@@ -35,8 +35,20 @@
         "stairHeight": 50,
         "gapWidth": 45,
         "obstacles": [
-          { "type": "floating", "startX": 300, "count": 4, "spacing": 120, "offsetY": -100 },
-          { "type": "diagonal", "startX": 600, "count": 6, "spacing": 100, "offsetY": -150 }
+          {
+            "type": "floating",
+            "startX": 300,
+            "count": 4,
+            "spacing": 120,
+            "offsetY": -100
+          },
+          {
+            "type": "diagonal",
+            "startX": 600,
+            "count": 6,
+            "spacing": 100,
+            "offsetY": -150
+          }
         ]
       },
       "goalX": 850,
@@ -60,8 +72,20 @@
         "stairHeight": 55,
         "gapWidth": 60,
         "obstacles": [
-          { "type": "floating", "startX": 200, "count": 5, "spacing": 110, "offsetY": -90 },
-          { "type": "floating", "startX": 700, "count": 4, "spacing": 130, "offsetY": -140 }
+          {
+            "type": "floating",
+            "startX": 200,
+            "count": 5,
+            "spacing": 110,
+            "offsetY": -90
+          },
+          {
+            "type": "floating",
+            "startX": 700,
+            "count": 4,
+            "spacing": 130,
+            "offsetY": -140
+          }
         ]
       },
       "goalX": 920,
@@ -85,8 +109,20 @@
         "stairHeight": 52,
         "gapWidth": 70,
         "obstacles": [
-          { "type": "diagonal", "startX": 300, "count": 5, "spacing": 100, "offsetY": -110 },
-          { "type": "floating", "startX": 750, "count": 3, "spacing": 140, "offsetY": -70 }
+          {
+            "type": "diagonal",
+            "startX": 300,
+            "count": 5,
+            "spacing": 100,
+            "offsetY": -110
+          },
+          {
+            "type": "floating",
+            "startX": 750,
+            "count": 3,
+            "spacing": 140,
+            "offsetY": -70
+          }
         ]
       },
       "goalX": 880,
@@ -110,8 +146,20 @@
         "stairHeight": 42,
         "gapWidth": 70,
         "obstacles": [
-          { "type": "floating", "startX": 250, "count": 5, "spacing": 115, "offsetY": -100 },
-          { "type": "diagonal", "startX": 700, "count": 4, "spacing": 90, "offsetY": -130 }
+          {
+            "type": "floating",
+            "startX": 250,
+            "count": 5,
+            "spacing": 115,
+            "offsetY": -100
+          },
+          {
+            "type": "diagonal",
+            "startX": 700,
+            "count": 4,
+            "spacing": 90,
+            "offsetY": -130
+          }
         ]
       },
       "goalX": 850,
@@ -120,8 +168,8 @@
     },
     {
       "name": "Final Challenge",
-      "gravity": 0.62,
-      "jumpV": -13.0,
+      "gravity": 0.5,
+      "jumpV": -20.0,
       "theme": { "bg": "#1a0033", "platform": "#9c27b0", "blob": "#ff1493" },
       "start": { "x": 40, "y": 500, "r": 26 },
       "platforms": [],
@@ -135,14 +183,32 @@
         "stairHeight": 45,
         "gapWidth": 75,
         "obstacles": [
-          { "type": "diagonal", "startX": 220, "count": 6, "spacing": 100, "offsetY": -110 },
-          { "type": "floating", "startX": 450, "count": 5, "spacing": 120, "offsetY": -75 },
-          { "type": "diagonal", "startX": 800, "count": 4, "spacing": 110, "offsetY": -130 }
+          {
+            "type": "diagonal",
+            "startX": 220,
+            "count": 6,
+            "spacing": 100,
+            "offsetY": -110
+          },
+          {
+            "type": "floating",
+            "startX": 450,
+            "count": 5,
+            "spacing": 120,
+            "offsetY": -75
+          },
+          {
+            "type": "diagonal",
+            "startX": 800,
+            "count": 4,
+            "spacing": 110,
+            "offsetY": -130
+          }
         ]
       },
       "goalX": 880,
       "goalY": 100,
-      "goalRadius": 20
+      "goalRadius": 50
     }
   ]
 }
