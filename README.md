@@ -1,6 +1,6 @@
 ## Project Title
 
-GBDA302 Week 4 Example 4: layable Maze (JSON + Level class + Player class)
+GBDA302 Week 4 Example 5: Blob Platformer (JSON + Classes)
 
 ---
 
@@ -13,6 +13,12 @@ Karen Cochrane, David Han, Tristan Whalen
 ## Description
 
 Game with levels that get progressively harder as you move on. You get transfered through portals and have to naviagte on platforms and jump from spot to spot.
+
+## Assets
+
+N/A
+
+---
 
 ## GenAI
 

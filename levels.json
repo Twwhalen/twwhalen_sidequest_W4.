@@ -1,22 +1,148 @@
 {
+  "schemaVersion": 1,
   "levels": [
-    [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 2, 0, 0, 0, 1, 0, 0, 0, 1],
-      [1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 3, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ],
-    [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 2, 0, 0, 1, 0, 0, 0, 3, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-      [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-      [1, 0, 0, 0, 1, 0, 0, 1, 0, 1],
-      [1, 1, 1, 0, 1, 0, 0, 1, 0, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]
+    {
+      "name": "Intro Steps",
+      "gravity": 0.65,
+      "jumpV": -11.0,
+      "theme": { "bg": "#F0F0F0", "platform": "#C8C8C8", "blob": "#1478FF" },
+      "start": { "x": 80, "y": 220, "r": 26 },
+      "platforms": [
+        { "x": 0, "y": 324, "w": 640, "h": 36 },
+        { "x": 120, "y": 254, "w": 120, "h": 12 },
+        { "x": 300, "y": 204, "w": 90, "h": 12 },
+        { "x": 440, "y": 144, "w": 130, "h": 12 },
+        { "x": 520, "y": 254, "w": 90, "h": 12 }
+      ],
+      "goalX": 580,
+      "goalY": 280,
+      "goalRadius": 20
+    },
+    {
+      "name": "Ascending Challenge",
+      "gravity": 0.65,
+      "jumpV": -11.0,
+      "theme": { "bg": "#1a1a2e", "platform": "#16c784", "blob": "#00d4ff" },
+      "start": { "x": 40, "y": 500, "r": 26 },
+      "platforms": [],
+      "levelType": "generated",
+      "generationParams": {
+        "groundY": 540,
+        "groundWidth": 900,
+        "stairStart": 80,
+        "stairCount": 8,
+        "stairWidth": 80,
+        "stairHeight": 50,
+        "gapWidth": 45,
+        "obstacles": [
+          { "type": "floating", "startX": 300, "count": 4, "spacing": 120, "offsetY": -100 },
+          { "type": "diagonal", "startX": 600, "count": 6, "spacing": 100, "offsetY": -150 }
+        ]
+      },
+      "goalX": 850,
+      "goalY": 60,
+      "goalRadius": 20
+    },
+    {
+      "name": "Forest Path",
+      "gravity": 0.62,
+      "jumpV": -10.8,
+      "theme": { "bg": "#2d5016", "platform": "#7cb342", "blob": "#ffeb3b" },
+      "start": { "x": 40, "y": 480, "r": 26 },
+      "platforms": [],
+      "levelType": "generated",
+      "generationParams": {
+        "groundY": 520,
+        "groundWidth": 1000,
+        "stairStart": 100,
+        "stairCount": 7,
+        "stairWidth": 90,
+        "stairHeight": 55,
+        "gapWidth": 60,
+        "obstacles": [
+          { "type": "floating", "startX": 200, "count": 5, "spacing": 110, "offsetY": -90 },
+          { "type": "floating", "startX": 700, "count": 4, "spacing": 130, "offsetY": -140 }
+        ]
+      },
+      "goalX": 920,
+      "goalY": 40,
+      "goalRadius": 20
+    },
+    {
+      "name": "Volcanic Escape",
+      "gravity": 0.72,
+      "jumpV": -10.2,
+      "theme": { "bg": "#3e2723", "platform": "#d84315", "blob": "#ff6e40" },
+      "start": { "x": 50, "y": 480, "r": 26 },
+      "platforms": [],
+      "levelType": "generated",
+      "generationParams": {
+        "groundY": 520,
+        "groundWidth": 950,
+        "stairStart": 120,
+        "stairCount": 8,
+        "stairWidth": 75,
+        "stairHeight": 52,
+        "gapWidth": 70,
+        "obstacles": [
+          { "type": "diagonal", "startX": 300, "count": 5, "spacing": 100, "offsetY": -110 },
+          { "type": "floating", "startX": 750, "count": 3, "spacing": 140, "offsetY": -70 }
+        ]
+      },
+      "goalX": 880,
+      "goalY": 80,
+      "goalRadius": 20
+    },
+    {
+      "name": "Ice Crown",
+      "gravity": 0.55,
+      "jumpV": -12.5,
+      "theme": { "bg": "#0d47a1", "platform": "#81d4fa", "blob": "#4dd0e1" },
+      "start": { "x": 30, "y": 500, "r": 26 },
+      "platforms": [],
+      "levelType": "generated",
+      "generationParams": {
+        "groundY": 540,
+        "groundWidth": 1050,
+        "stairStart": 80,
+        "stairCount": 10,
+        "stairWidth": 70,
+        "stairHeight": 42,
+        "gapWidth": 80,
+        "obstacles": [
+          { "type": "floating", "startX": 250, "count": 6, "spacing": 125, "offsetY": -120 },
+          { "type": "diagonal", "startX": 800, "count": 5, "spacing": 95, "offsetY": -160 }
+        ]
+      },
+      "goalX": 950,
+      "goalY": 50,
+      "goalRadius": 20
+    },
+    {
+      "name": "Final Challenge",
+      "gravity": 0.68,
+      "jumpV": -11.5,
+      "theme": { "bg": "#1a0033", "platform": "#9c27b0", "blob": "#ff1493" },
+      "start": { "x": 40, "y": 500, "r": 26 },
+      "platforms": [],
+      "levelType": "generated",
+      "generationParams": {
+        "groundY": 540,
+        "groundWidth": 1100,
+        "stairStart": 70,
+        "stairCount": 11,
+        "stairWidth": 80,
+        "stairHeight": 45,
+        "gapWidth": 90,
+        "obstacles": [
+          { "type": "diagonal", "startX": 200, "count": 7, "spacing": 105, "offsetY": -130 },
+          { "type": "floating", "startX": 400, "count": 6, "spacing": 135, "offsetY": -95 },
+          { "type": "diagonal", "startX": 850, "count": 6, "spacing": 110, "offsetY": -170 }
+        ]
+      },
+      "goalX": 1000,
+      "goalY": 30,
+      "goalRadius": 20
+    }
   ]
 }
