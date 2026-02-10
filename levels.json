@@ -120,8 +120,8 @@
     },
     {
       "name": "Final Challenge",
-      "gravity": 0.68,
-      "jumpV": -11.5,
+      "gravity": 0.65,
+      "jumpV": -12.5,
       "theme": { "bg": "#1a0033", "platform": "#9c27b0", "blob": "#ff1493" },
       "start": { "x": 40, "y": 500, "r": 26 },
       "platforms": [],
@@ -135,13 +135,13 @@
         "stairHeight": 45,
         "gapWidth": 90,
         "obstacles": [
-          { "type": "diagonal", "startX": 200, "count": 7, "spacing": 105, "offsetY": -130 },
-          { "type": "floating", "startX": 400, "count": 6, "spacing": 135, "offsetY": -95 },
-          { "type": "diagonal", "startX": 850, "count": 6, "spacing": 110, "offsetY": -170 }
+          { "type": "diagonal", "startX": 200, "count": 7, "spacing": 105, "offsetY": -120 },
+          { "type": "floating", "startX": 400, "count": 6, "spacing": 135, "offsetY": -85 },
+          { "type": "diagonal", "startX": 850, "count": 6, "spacing": 110, "offsetY": -140 }
         ]
       },
       "goalX": 1000,
-      "goalY": 30,
+      "goalY": 80,
       "goalRadius": 20
     }
   ]
