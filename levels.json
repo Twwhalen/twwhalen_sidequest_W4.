@@ -103,45 +103,45 @@
       "levelType": "generated",
       "generationParams": {
         "groundY": 540,
-        "groundWidth": 1050,
+        "groundWidth": 900,
         "stairStart": 80,
-        "stairCount": 10,
+        "stairCount": 8,
         "stairWidth": 70,
         "stairHeight": 42,
-        "gapWidth": 80,
+        "gapWidth": 70,
         "obstacles": [
-          { "type": "floating", "startX": 250, "count": 6, "spacing": 125, "offsetY": -120 },
-          { "type": "diagonal", "startX": 800, "count": 5, "spacing": 95, "offsetY": -160 }
+          { "type": "floating", "startX": 250, "count": 5, "spacing": 115, "offsetY": -100 },
+          { "type": "diagonal", "startX": 700, "count": 4, "spacing": 90, "offsetY": -130 }
         ]
       },
-      "goalX": 950,
-      "goalY": 50,
+      "goalX": 850,
+      "goalY": 80,
       "goalRadius": 20
     },
     {
       "name": "Final Challenge",
-      "gravity": 0.65,
-      "jumpV": -12.5,
+      "gravity": 0.62,
+      "jumpV": -13.0,
       "theme": { "bg": "#1a0033", "platform": "#9c27b0", "blob": "#ff1493" },
       "start": { "x": 40, "y": 500, "r": 26 },
       "platforms": [],
       "levelType": "generated",
       "generationParams": {
         "groundY": 540,
-        "groundWidth": 1100,
-        "stairStart": 70,
-        "stairCount": 11,
-        "stairWidth": 80,
+        "groundWidth": 950,
+        "stairStart": 80,
+        "stairCount": 9,
+        "stairWidth": 75,
         "stairHeight": 45,
-        "gapWidth": 90,
+        "gapWidth": 75,
         "obstacles": [
-          { "type": "diagonal", "startX": 200, "count": 7, "spacing": 105, "offsetY": -120 },
-          { "type": "floating", "startX": 400, "count": 6, "spacing": 135, "offsetY": -85 },
-          { "type": "diagonal", "startX": 850, "count": 6, "spacing": 110, "offsetY": -140 }
+          { "type": "diagonal", "startX": 220, "count": 6, "spacing": 100, "offsetY": -110 },
+          { "type": "floating", "startX": 450, "count": 5, "spacing": 120, "offsetY": -75 },
+          { "type": "diagonal", "startX": 800, "count": 4, "spacing": 110, "offsetY": -130 }
         ]
       },
-      "goalX": 1000,
-      "goalY": 80,
+      "goalX": 880,
+      "goalY": 100,
       "goalRadius": 20
     }
   ]
