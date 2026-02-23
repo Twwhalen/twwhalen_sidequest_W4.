@@ -71,6 +71,20 @@ class WorldLevel {
   generatePlatforms(params) {
     const platforms = [];
 
+    // Route to specific generator based on type
+    if (params.type === "zigzag") {
+      return this.generateZigZag(params);
+    } else if (params.type === "spiral") {
+      return this.generateSpiral(params);
+    } else if (params.type === "narrowcorridor") {
+      return this.generateNarrowCorridor(params);
+    } else if (params.type === "maze") {
+      return this.generateMaze(params);
+    } else if (params.type === "voidsparse") {
+      return this.generateVoidSparse(params);
+    }
+
+    // Legacy stair pattern for backward compatibility
     // 1. Ground platform
     platforms.push({
       x: 0,
@@ -120,6 +134,156 @@ class WorldLevel {
           }
         }
       }
+    }
+
+    return platforms;
+  }
+
+  /*
+  Zig-zag descent: platforms alternate left-right descending downward
+  */
+  generateZigZag(params) {
+    const platforms = [];
+    let currentX = params.startX;
+    let currentY = params.groundY;
+
+    // Add starting platform at top
+    platforms.push({
+      x: params.startX,
+      y: params.groundY - (params.platformCount - 1) * params.verticalGap - 50,
+      w: params.platformWidth,
+      h: params.platformHeight,
+    });
+
+    for (let i = 0; i < params.platformCount; i++) {
+      // Alternate left and right
+      if (i % 2 === 0) {
+        currentX = params.startX;
+      } else {
+        currentX = params.startX + params.horizontalOffset;
+      }
+
+      platforms.push({
+        x: currentX,
+        y: currentY - i * params.verticalGap,
+        w: params.platformWidth,
+        h: params.platformHeight,
+      });
+    }
+
+    return platforms;
+  }
+
+  /*
+  Spiral tower: platforms arranged in a circular spiral ascending upward
+  */
+  generateSpiral(params) {
+    const platforms = [];
+
+    // Add starting ground platform at the bottom, positioned closer
+    const startPlatY = params.startPlatformY || params.centerY + 80;
+    platforms.push({
+      x: params.centerX - 80,
+      y: startPlatY,
+      w: 160,
+      h: 20,
+    });
+
+    for (let i = 0; i < params.platformCount; i++) {
+      const progress = i / params.platformCount; // 0 to 1
+      const angle = progress * Math.PI * 4; // Two full rotations
+      const radius =
+        params.radiusStart - progress * (params.radiusStart - params.radiusEnd);
+      const y = params.centerY - i * params.verticalStep;
+
+      const x = params.centerX + Math.cos(angle) * radius;
+
+      platforms.push({
+        x: x,
+        y: y,
+        w: params.platformWidth,
+        h: params.platformHeight,
+      });
+    }
+
+    return platforms;
+  }
+
+  /*
+  Narrow corridor: zigzag path through a narrow space
+  */
+  generateNarrowCorridor(params) {
+    const platforms = [];
+
+    for (let i = 0; i < params.platformCount; i++) {
+      // Wiggle left and right within a narrow band
+      const baseX = params.startX + i * 60; // Progress rightward
+      const wiggle = Math.sin(i * 0.8) * params.horizontalWiggle;
+      const x = baseX + wiggle;
+      const y = params.groundY - i * params.verticalStep;
+
+      platforms.push({
+        x: x,
+        y: y,
+        w: params.corridorWidth,
+        h: params.platformHeight,
+      });
+    }
+
+    return platforms;
+  }
+
+  /*
+  Maze-like pattern: uses a 2D grid pattern
+  */
+  generateMaze(params) {
+    const platforms = [];
+    const pattern = params.mazePattern;
+
+    if (!pattern) return platforms;
+
+    for (let row = 0; row < pattern.length; row++) {
+      for (let col = 0; col < pattern[row].length; col++) {
+        if (pattern[row][col] === 1) {
+          const x = col * params.platformSize;
+          const y = params.groundY - row * params.platformSize;
+
+          platforms.push({
+            x: x,
+            y: y,
+            w: params.platformSize,
+            h: params.platformSize - 5,
+          });
+        }
+      }
+    }
+
+    return platforms;
+  }
+
+  /*
+  Sparse void: scattered platforms randomly placed
+  */
+  generateVoidSparse(params) {
+    const platforms = [];
+
+    // Seeded random for consistency
+    let seed = params.randomSeed || 42;
+    const seededRandom = () => {
+      seed = (seed * 9301 + 49297) % 233280;
+      return seed / 233280;
+    };
+
+    for (let i = 0; i < params.platformCount; i++) {
+      const x = params.minX + seededRandom() * (params.maxX - params.minX);
+      const y = params.minY + seededRandom() * (params.maxY - params.minY);
+
+      platforms.push({
+        x: x,
+        y: y,
+        w: params.platformWidth,
+        h: params.platformHeight,
+      });
     }
 
     return platforms;

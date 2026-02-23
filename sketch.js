@@ -22,6 +22,9 @@ let world; // WorldLevel instance (current level)
 let player; // BlobPlayer instance
 
 let gameComplete = false; // Track if all levels are beaten
+let gameState = "playing"; // "playing", "won", "lost"
+let levelStartTime = 0;
+let levelTimeLimit = null;
 
 function preload() {
   // Load the level data from disk before setup runs.
@@ -31,6 +34,9 @@ function preload() {
 function setup() {
   // Create the player once (it will be respawned per level).
   player = new BlobPlayer();
+
+  // Set larger canvas
+  createCanvas(900, 600);
 
   // Load the first level.
   loadLevel(0);
@@ -43,7 +49,17 @@ function setup() {
 }
 
 function draw() {
-  // If game is complete, show end screen
+  // If game state is won or lost, show result screen
+  if (gameState === "won") {
+    drawWinScreen();
+    return;
+  }
+  if (gameState === "lost") {
+    drawLoseScreen();
+    return;
+  }
+
+  // If all levels complete, show end screen
   if (gameComplete) {
     drawEndScreen();
     return;
@@ -62,13 +78,28 @@ function draw() {
   // 4) Check if player reached the goal
   checkGoal();
 
-  // 5) HUD
+  // 5) Check if time ran out (for bonus level)
+  if (levelTimeLimit !== null) {
+    checkTimeLimit();
+  }
+
+  // 6) HUD
   textAlign(LEFT);
   fill(0);
   textSize(14);
   text(world.name, 10, 18);
   text(`Level ${levelIndex + 1} / ${data.levels.length}`, 10, 36);
   text("Move: A/D or ←/→ • Jump: Space/W/↑ • Next: N", 10, 54);
+
+  // 7) Timer display for bonus level
+  if (levelTimeLimit !== null) {
+    const elapsed = (millis() - levelStartTime) / 1000;
+    const remaining = max(0, levelTimeLimit - elapsed);
+    fill(255, 0, 0);
+    textSize(24);
+    textAlign(RIGHT);
+    text(`Time: ${remaining.toFixed(1)}s`, width - 20, 40);
+  }
 }
 
 /*
@@ -84,7 +115,7 @@ function checkFall() {
 
 /*
 Check if player has reached the goal.
-If so, automatically load the next level.
+If so, automatically load the next level or mark as won.
 */
 function checkGoal() {
   const dx = player.x - world.goal.x;
@@ -95,12 +126,62 @@ function checkGoal() {
   if (distance < player.r + world.goal.r) {
     levelIndex++;
     if (levelIndex >= data.levels.length) {
-      // All levels complete!
-      gameComplete = true;
+      // All levels complete - show win screen
+      gameState = "won";
     } else {
       loadLevel(levelIndex);
     }
   }
+}
+
+/*
+Check if time ran out on bonus level.
+*/
+function checkTimeLimit() {
+  const elapsed = (millis() - levelStartTime) / 1000;
+  if (elapsed > levelTimeLimit) {
+    gameState = "lost";
+  }
+}
+
+/*
+Draw the win screen.
+*/
+function drawWinScreen() {
+  background(50, 200, 50);
+
+  fill(255);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("🎉 CONGRATULATIONS! 🎉", width / 2, height / 2 - 100);
+
+  textSize(32);
+  fill(255, 255, 200);
+  text("You completed all levels!", width / 2, height / 2);
+
+  textSize(18);
+  fill(255);
+  text("Press R to restart", width / 2, height / 2 + 80);
+}
+
+/*
+Draw the lose screen (time ran out).
+*/
+function drawLoseScreen() {
+  background(200, 50, 50);
+
+  fill(255);
+  textSize(64);
+  textAlign(CENTER, CENTER);
+  text("⏰ TIME'S UP! ⏰", width / 2, height / 2 - 100);
+
+  textSize(32);
+  fill(255, 255, 200);
+  text("Better luck next time!", width / 2, height / 2);
+
+  textSize(18);
+  fill(255);
+  text("Press R to restart or N to retry this level", width / 2, height / 2 + 80);
 }
 
 /*
@@ -116,18 +197,50 @@ function drawEndScreen() {
 
   textSize(32);
   fill(200, 255, 100);
-  text(`You conquered all ${data.levels.length} levels!`, width / 2, height / 2);
+  text(
+    `You conquered all ${data.levels.length} levels!`,
+    width / 2,
+    height / 2,
+  );
 
   textSize(18);
   fill(150, 200, 255);
-  text("Press R to restart or N to play a specific level", width / 2, height / 2 + 80);
+  text(
+    "Press R to restart or N to play a specific level",
+    width / 2,
+    height / 2 + 80,
+  );
 }
 
 function keyPressed() {
+  // If game state is won or lost, handle result screen input
+  if (gameState === "won") {
+    if (key === "r" || key === "R") {
+      gameState = "playing";
+      levelIndex = 0;
+      loadLevel(0);
+    }
+    return;
+  }
+
+  if (gameState === "lost") {
+    if (key === "r" || key === "R") {
+      gameState = "playing";
+      levelIndex = 0;
+      loadLevel(0);
+    }
+    if (key === "n" || key === "N") {
+      gameState = "playing";
+      loadLevel(levelIndex);
+    }
+    return;
+  }
+
   // If game is complete, handle end screen input
   if (gameComplete) {
     if (key === "r" || key === "R") {
       gameComplete = false;
+      gameState = "playing";
       levelIndex = 0;
       loadLevel(0);
     }
@@ -143,6 +256,7 @@ function keyPressed() {
   if (key === "n" || key === "N") {
     const next = (levelIndex + 1) % data.levels.length;
     gameComplete = false;
+    gameState = "playing";
     levelIndex = next;
     loadLevel(next);
   }
@@ -167,4 +281,9 @@ function loadLevel(i) {
 
   // Apply level settings + respawn.
   player.spawnFromLevel(world);
+
+  // Reset game state and set timer if this level has a time limit
+  gameState = "playing";
+  levelStartTime = millis();
+  levelTimeLimit = data.levels[levelIndex].timeLimit || null;
 }

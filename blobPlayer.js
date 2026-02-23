@@ -28,7 +28,7 @@ class BlobPlayer {
     // ----- Transform -----
     this.x = 0;
     this.y = 0;
-    this.r = 26;
+    this.r = 18;
 
     // ----- Velocity -----
     this.vx = 0;
@@ -97,10 +97,21 @@ class BlobPlayer {
     // 4) Clamp max run speed
     this.vx = constrain(this.vx, -this.maxRun, this.maxRun);
 
-    // 5) Apply gravity every frame
-    this.vy += this.gravity;
+    // 5) Vertical input (if gravity is 0, allow free vertical movement)
+    if (this.gravity === 0) {
+      let vertMove = 0;
+      if (keyIsDown(87) || keyIsDown(UP_ARROW)) vertMove -= 1;  // W or UP
+      if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) vertMove += 1;  // S or DOWN
+      
+      this.vy += this.accel * vertMove;
+      this.vy *= this.frictionAir;
+      this.vy = constrain(this.vy, -this.maxRun, this.maxRun);
+    } else {
+      // 6) Apply gravity every frame (normal gravity)
+      this.vy += this.gravity;
+    }
 
-    // 6) Build an AABB around the blob (center/radius -> box)
+    // 7) Build an AABB around the blob (center/radius -> box)
     let box = {
       x: this.x - this.r,
       y: this.y - this.r,
@@ -108,7 +119,7 @@ class BlobPlayer {
       h: this.r * 2,
     };
 
-    // 7) Move in X and resolve collisions
+    // 8) Move in X and resolve collisions
     box.x += this.vx;
 
     for (const s of platforms) {
@@ -123,7 +134,7 @@ class BlobPlayer {
       }
     }
 
-    // 8) Move in Y and resolve collisions
+    // 9) Move in Y and resolve collisions
     box.y += this.vy;
 
     // Reset and recompute onGround each frame during Y resolution.
@@ -144,7 +155,7 @@ class BlobPlayer {
       }
     }
 
-    // 9) Write back blob center from box position
+    // 10) Write back blob center from box position
     this.x = box.x + box.w / 2;
     this.y = box.y + box.h / 2;
 
