@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../../Downloads/Week4_Examples/Week4_Example05/libraries"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "twwhalen_sidequest_w4"
+  }
+}
